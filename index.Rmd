@@ -1,0 +1,85 @@
+---
+title       : Learning Statistical Concepts With R and Shiny
+subtitle    : 
+author      : KT8
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Overview
+
+- Statistics can be a rather abstract topic to most students
+who first come into contact with it.
+
+- Certain statistical concepts are also rather difficult to 
+grasp when taught only on paper.
+
+- We've developed an interactive website to help students
+understand a key concept in statistics.
+
+---
+
+## Effect of Sample Size
+
+- The sample size is an important parameter of consideration
+when trying to calculate the sample mean and sample variance
+
+- The sample standard deviation is typically known to 
+follow the equation:
+
+- The sample is however known to be invariant towards the 
+sample size.
+
+- Our website allows students to test this out themselves
+using data simulated from a Poisson Model.
+
+---
+
+## Sample Plots
+
+```{r, echo=FALSE}
+data1<-replicate(1000, mean(rpois(10, 2)))
+data2<-replicate(1000, mean(rpois(100, 2)))
+
+par(mfrow=c(2,1))
+    
+data1.mean<-mean(data1)
+data2.mean<-mean(data2)
+data1.sd<-sd(data1)
+data2.sd<-sd(data2)
+
+lowerlim<-min(data1, data2)
+upperlim<-max(data1, data2)
+
+hist(data1, breaks=20, col="blue", xlim=c(lowerlim,upperlim), main=paste("Sample size =", 10))
+abline(v=data1.mean, col="red")
+text(3,130,paste0("Mean = ", data1.mean), col="red")
+text(3,110,paste0("Std.dev = ", round(data1.sd, 5)), col="purple")
+hist(data2, breaks=20, col="blue", xlim=c(lowerlim,upperlim), main=paste("Sample size =", 100))
+abline(v=data2.mean, col="red")
+text(3,130,paste0("Mean = ", data2.mean), col="red")
+text(3,110,paste0("Std.dev = ", round(data2.sd, 5)), col="purple")
+
+```
+
+---
+
+## Conclusion
+
+- An interactive website has been designed to help students
+learn statistical concepts.
+
+- We hope this will be an invaluable tool for educators
+
+- Interactive interfaces can also be built to illustrate 
+other statistical concepts.
+
+- App is accessible at:
+https://ktw88.shinyapps.io/Data_Products/
+
+
